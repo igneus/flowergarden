@@ -16,6 +16,9 @@ class User(models.Model):
     # to give flowers to...
     sex = models.CharField(max_length=1)
     
+    def __unicode__(self):
+        return "#" + str(self.id) + ": " + self.name + " (" + self.nick + ")"
+    
     
 class Bouquet(models.Model):
     """
@@ -40,6 +43,9 @@ class Bouquet(models.Model):
     # a short message may be attached:
     message = models.TextField(max_length=512)
     
+    def __unicode__(self):
+        return "#" + str(self.id) + " for " + self.receiver.nick
+    
     
 class Flower(models.Model):
     """
@@ -52,3 +58,5 @@ class Flower(models.Model):
     name = models.CharField(max_length=60)
     bouquet = models.ForeignKey(Bouquet)
     
+    def __unicode__(self):
+        return "#" + str(self.id) + ": " + self.name
