@@ -14,5 +14,7 @@ def detail(request, user_id):
     """
     detail of a user
     """
-    p = django.shortcuts.get_object_or_404(UserProfile, pk=user_id)
-    return django.shortcuts.render_to_response('flowers/detail.html', {'profile': p})
+    profile = django.shortcuts.get_object_or_404(UserProfile, pk=user_id)
+    bouquets = profile.received_bouquets.all()
+        
+    return django.shortcuts.render_to_response('flowers/detail.html', {'profile': profile, 'bouquets': bouquets})
