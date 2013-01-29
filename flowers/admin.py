@@ -12,6 +12,8 @@ class BouquetAdmin(admin.ModelAdmin):
     
     list_display = ('receiver', 'sender', 'given')
     
+    # todo: positions of particular flowers in a bouquet shouldn't be set manually, but determined by the application
+    
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     max_num = 1
