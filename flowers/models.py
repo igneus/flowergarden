@@ -35,7 +35,7 @@ class Bouquet(models.Model):
     
     # if this is true, accepted is date of rejection;
     # otherwise it's date of acceptance
-    rejected = models.BooleanField()
+    rejected = models.BooleanField(default=False)
     
     # if this is false, don't expose the sender's identity to the receiver 
     show_sender = models.BooleanField(default=True)
