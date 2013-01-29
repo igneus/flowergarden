@@ -1,12 +1,12 @@
-<h1>{{ user.name }}</h1>
+<h1>{{ profile.user.get_full_name }}</h1>
 
 <ul>
-    <li>nick: {{ user.nick }}</li>
+    <li>nick: {{ profile.user.username }}</li>
     <li>sex:
-    {% if user.sex == "f" %}
-        female
+    {% if profile.sex == "f" %}
+        <span class="sex">♀</span>
     {% else %}
-        male
+        <span class="sex">♂</span>
     {% endif %}
     </li>
 </ul>
