@@ -8,7 +8,7 @@ class User(models.Model):
     """
     
     name = models.CharField("Your name to be displayed", max_length=128)
-    nick = models.CharField("Your nick to log on with", max_length=128)
+    nick = models.CharField("Your nick to log on with", max_length=128) # todo: nick *must* be unique
     avatar = models.ImageField(upload_to='avatars')
     # m or f - the intention behind flowergarden is to give women
     # flowers, but of course nothing will prevent men to receive flowers too.
@@ -31,7 +31,7 @@ class Bouquet(models.Model):
     receiver = models.ForeignKey(User, related_name='received_bouquets')
     # dates
     given = models.DateTimeField(default=0)
-    accepted = models.DateTimeField(default=0)
+    accepted = models.DateTimeField(default=0) # todo: allow empty
     
     # if this is true, accepted is date of rejection;
     # otherwise it's date of acceptance
