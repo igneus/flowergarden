@@ -53,6 +53,8 @@ class Flower(models.Model):
     from the name.)
     """
     
+    # todo: there should be a table of flower types and individual flowers should be just references to them
+    
     # the flowers actually don't have unique names and this property
     # should be replaced by subclassing in some future refactoring
     name = models.CharField(max_length=60)
