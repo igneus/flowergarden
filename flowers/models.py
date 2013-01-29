@@ -1,23 +1,36 @@
 from django.db import models
+import django.db.models.signals
+from django.contrib.auth.models import User
 
 # todo: the users should be in their own package
     
-class User(models.Model):
+class UserProfile(models.Model):
     """
     A User receives, rejects and owns Bouquets.
     """
     
-    name = models.CharField("Your name to be displayed", max_length=128)
-    nick = models.CharField("Your nick to log on with", max_length=128) # todo: nick *must* be unique
+    # connection to the User model from django.contrib.auth.models
+    user = models.OneToOneField(User)
+    
     avatar = models.ImageField(upload_to='avatars')
     # m or f - the intention behind flowergarden is to give women
     # flowers, but of course nothing will prevent men to receive flowers too.
     # Though, it might be useful sometimes to know the sex of the one you wish
     # to give flowers to...
-    sex = models.CharField(max_length=1)
+    sex = models.CharField(max_length=1, choices=(('f', 'female'), ('m', 'male')), default='f')
     
     def __unicode__(self):
-        return "#" + str(self.id) + ": " + self.name + " (" + self.nick + ")"
+        return "#" + str(self.id) + ": " + self.user.get_full_name() + " (" + self.user.username + ")"
+    
+    def create_user_profile(sender, instance, created, **kwargs):
+        """
+        a signal handler (django.contrib.auth.User triggers it on instance creation)
+        """
+        if created:
+            UserProfile.objects.create(user=instance)
+
+    # register signal handler
+    django.db.models.signals.post_save.connect(create_user_profile, sender=User)
     
     
 class Bouquet(models.Model):
@@ -27,11 +40,11 @@ class Bouquet(models.Model):
     A message may be attached.
     """
     
-    sender = models.ForeignKey(User, related_name='sent_bouquets')
-    receiver = models.ForeignKey(User, related_name='received_bouquets')
+    sender = models.ForeignKey(UserProfile, related_name='sent_bouquets')
+    receiver = models.ForeignKey(UserProfile, related_name='received_bouquets')
     # dates
     given = models.DateTimeField(default=0)
-    accepted = models.DateTimeField(default=0) # todo: allow empty
+    accepted = models.DateTimeField(default=0, blank=True, null=True)
     
     # if this is true, accepted is date of rejection;
     # otherwise it's date of acceptance
@@ -44,21 +57,31 @@ class Bouquet(models.Model):
     message = models.TextField(max_length=512)
     
     def __unicode__(self):
-        return "#" + str(self.id) + " for " + self.receiver.nick
+        return "#" + str(self.id) + " for " + self.receiver.user.username
     
     
+class FlowerType(models.Model):
+    """
+    A type of Flowers available for your Bouquets.
+    """
+    name = models.CharField(max_length=64)
+    pretty_name = models.CharField(max_length=64)
+    
+    def __unicode__(self):
+        return self.pretty_name
+    
+    # todo: not all flower types should be available to everyone at every time - the less common ones should be somehow rare or expensive    
+
 class Flower(models.Model):
     """
-    A Flower has a name and a graphical representation (which is determined
-    from the name.)
+    A particular Flower contained in a particular Bouquet.
     """
-    
-    # todo: there should be a table of flower types and individual flowers should be just references to them
     
     # the flowers actually don't have unique names and this property
     # should be replaced by subclassing in some future refactoring
-    name = models.CharField(max_length=60)
     bouquet = models.ForeignKey(Bouquet)
+    flower_type = models.ForeignKey(FlowerType)
+    position = models.IntegerField(help_text="Position of the flower in a bouquet (beginning with 0)")
     
     def __unicode__(self):
-        return "#" + str(self.id) + ": " + self.name
+        return "#" + str(self.id) + ": " + self.flower_type.pretty_name + " in bouquet #" + str(self.bouquet.id)

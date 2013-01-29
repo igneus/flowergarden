@@ -153,3 +153,7 @@ LOGGING = {
         },
     }
 }
+
+# Connect the instances of flowergarden.UserProfile
+# with their respective django.contrib.auth.User instances
+AUTH_PROFILE_MODULE = 'flowergarden.UserProfile'
