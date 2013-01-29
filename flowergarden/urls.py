@@ -4,10 +4,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('flowers.views',
-    url(r'^users/(?P<user_id>\d+)/*$', 'detail'),
-    url(r'^users/*', 'list')
-)
-urlpatterns += patterns('',
+urlpatterns = patterns('',
+    url(r'^flowers/', include('flowers.urls')),
     url(r'^admin/', include(admin.site.urls))
 )
