@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# todo: the users should be in their own package
     
 class User(models.Model):
     """
