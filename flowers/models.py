@@ -12,6 +12,7 @@ class UserProfile(models.Model):
     # connection to the User model from django.contrib.auth.models
     user = models.OneToOneField(User)
     
+    # todo: prevent users from rewriting each other's avatar by using the same filename
     avatar = models.ImageField(upload_to='avatars')
     # m or f - the intention behind flowergarden is to give women
     # flowers, but of course nothing will prevent men to receive flowers too.
