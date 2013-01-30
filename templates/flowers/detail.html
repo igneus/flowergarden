@@ -1,4 +1,9 @@
-<h1>{{ profile.user.get_full_name }}</h1>
+{% extends "flowers/base_generic.html" %}
+
+{% block title %} {{ profile.user.get_full_name }} | user profile | flowergarden {% endblock %}
+{% block mainheading %} {{ profile.user.get_full_name }} {% endblock %}
+
+{% block content %}
 
 <h2>Personal info</h2>
 
@@ -8,9 +13,9 @@
     <li>nick: {{ profile.user.username }}</li>
     <li>sex:
     {% if profile.sex == "f" %}
-        <span class="sex">♀</span>
+        <span class="sex female">♀</span>
     {% else %}
-        <span class="sex">♂</span>
+        <span class="sex male">♂</span>
     {% endif %}
     </li>
 </ul>
@@ -31,3 +36,5 @@
 {% endif %}
 
 <a href="/flowers/users">all users</a>
+
+{% endblock %}
