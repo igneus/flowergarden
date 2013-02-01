@@ -1,4 +1,4 @@
-This is my Django-learning application.
+This is my Django-learning project.
 It is a webization of one of the man's most important tasks:
 to give girls and women flowers.
 
