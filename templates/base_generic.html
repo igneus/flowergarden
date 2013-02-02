@@ -1,10 +1,11 @@
+{% load static %}
 <!doctype html>
     
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
     
-    <link rel="stylesheet" type="text/css" href="/static/css/flowers.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/flowers.css" %}"/>
 </head>
 
 <body>
