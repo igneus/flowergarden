@@ -5,6 +5,23 @@
 
 {% block content %}
     <div>
+        <h2>New bouquets</h2>
+        {% if new_bouquets %}
+            {% for b in new_bouquets %}
+                {{ b.sender.user.username }}
+                gave a bouquet to
+                {{ b.receiver.user.username }}
+                ({{ b.given|time:"H:i" }})
+            {% endfor %}
+        {% else %}
+            <p>
+                What? No new bouquets? Go and give someone flowers!
+            </p>
+        {% endif %}
+    </div>
+    
+    <div>
+        <h2>New users</h2>
         <p>
             Welcome our new users by a flower-gift:
         </p>
