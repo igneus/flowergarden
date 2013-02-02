@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block title %}create user account{% endblock %}
+{% block mainheading %}Create account{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url users.views.create_process %}">
+        {% csrf_token %}
+        <label for="nick">nick:</label>
+            <input type="text" name="nick" required>
+                
+        <label for="password1">password:</label>
+            <input type="password" name="password1" required>
+        <label for="password2">once more, please:</label>
+            <input type="password" name="password2" required>
+    
+        <label for="firstname">first name:</label>
+            <input type="text" name="firstname">
+        
+        <label for="lastname">last name:</label>
+            <input type="text" name="lastname">
+                
+        <label for="sex">sex:</label>
+            <select name="sex" required>{# todo: DRY #}
+                <option value="f">female</option>
+                <option value="m">male</option>
+            </select>
+        
+        <label for="email">e-mail:</label>
+            <input type="email" name="email">
+                
+        <label></label>
+        <input type="submit" value="Create an account for me">
+    </form>
+{% endblock %}

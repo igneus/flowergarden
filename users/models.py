@@ -16,7 +16,8 @@ class UserProfile(models.Model):
     # flowers, but of course nothing will prevent men to receive flowers too.
     # Though, it might be useful sometimes to know the sex of the one you wish
     # to give flowers to...
-    sex = models.CharField(max_length=1, choices=(('f', 'female'), ('m', 'male')), default='f')
+    SEX_CHOICES = (('f', 'female'), ('m', 'male'))
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES, default='f')
     
     def __unicode__(self):
         return "#" + str(self.id) + ": " + self.user.get_full_name() + " (" + self.user.username + ")"
