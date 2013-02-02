@@ -14,8 +14,13 @@
         <div class="header">
             <span class="sitetitle"><a href="{% url homepage.views.home %}">flowergarden</a></span>
             <span id="navigation">
-                <a href="{% url users.views.list %}">All users</a>
-                <a href="{% url homepage.views.login %}">Log in</a> or <a href="{% url users.views.create %}">Create account</a>
+                <a href="{% url users.views.list %}">All users</a> |
+                {% if not actor or not actor.is_authenticated %}
+                    <a href="{% url homepage.views.login %}">Log in</a> or <a href="{% url users.views.create %}">Create account</a>
+                {% else %}
+                    <a href="{% url users.views.detail actor.userprofile.id %}">My profile [{{ actor.username }}]</a>
+                    <a href="">Log out</a>
+                {% endif %}
             </span>
         </div>
         

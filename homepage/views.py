@@ -17,7 +17,7 @@ def home(request):
     bouquets = Bouquet.objects.all().order_by('accepted').reverse()[:bouquets_limit]
     
     return django.shortcuts.render_to_response('homepage.html',
-                                               {'new_users': newcomers, 'new_bouquets': bouquets})
+                                               {'new_users': newcomers, 'new_bouquets': bouquets, 'actor': request.user})
 
 class LoginForm(forms.Form):
     nick = forms.CharField()
@@ -27,6 +27,8 @@ def login(request):
     """
     show the login-form
     """
+    
+    # todo: logged-in user mustn't be abble to log in again without logging out before
     
     if request.method == 'POST':
         login_form = LoginForm(request.POST)

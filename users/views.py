@@ -48,7 +48,7 @@ def list(request):
     list users
     """
     users = UserProfile.objects.all()
-    return django.shortcuts.render_to_response('list.html', {'profiles_list': users})
+    return django.shortcuts.render_to_response('list.html', {'actor': request.user, 'profiles_list': users})
 
 def detail(request, user_id):
     """
@@ -57,4 +57,4 @@ def detail(request, user_id):
     profile = django.shortcuts.get_object_or_404(UserProfile, pk=user_id)
     bouquets = profile.received_bouquets.all()
         
-    return django.shortcuts.render_to_response('detail.html', {'profile': profile, 'bouquets': bouquets})
+    return django.shortcuts.render_to_response('detail.html', {'actor': request.user, 'profile': profile, 'bouquets': bouquets})
