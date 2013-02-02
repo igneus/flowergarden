@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block title %}flowergarden{% endblock %}
+{% block mainheading %}Flowergarden{% endblock %}
+
+{% block content %}
+    <div>
+        <p>
+            Welcome our new users by a flower-gift:
+        </p>
+        <p>
+            {% for u in new_users %}
+                <a href="{% url users.views.detail u.user.id %}">{{ u.user.username }}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    </div>
+{% endblock %}
