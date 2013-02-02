@@ -12,10 +12,15 @@
     <div class="wrapper">
         <div class="header">
             <span class="sitetitle"><a href="{% url homepage.views.home %}">flowergarden</a></span>
+            <span id="navigation">
+                <a href="{% url users.views.list %}">All users</a>
+                <a href="">Log in</a> or <a href="">Create account</a>
+            </span>
         </div>
         
-        
-        <h1>{% block mainheading %}{% endblock %}</h1>
+        {% block mainheading_block %}
+            <h1>{% block mainheading %}{% endblock %}</h1>
+        {% endblock %}
         
         {% block content %}
         {% endblock %}
