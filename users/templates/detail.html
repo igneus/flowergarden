@@ -7,7 +7,9 @@
 
 <h2>Personal info</h2>
 
-<img src="/static/{{ profile.avatar.url }}" alt="avatar" />
+{% if profile.avatar %}
+    <img src="/static/{{ profile.avatar.url }}" alt="avatar" />
+{% endif %}
 
 <ul>
     <li>nick: {{ profile.user.username }}</li>

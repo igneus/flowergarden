@@ -14,7 +14,22 @@ def create(request):
         # arriving data to process
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            # todo: process data, create a user account
+            data = form.cleaned_data
+            
+            if data['password1'] != data['password2']:
+                return django.shortcuts.render_to_response('create_form.html',
+                                                   {'form': form, 'error_message': 'The two versions of your password differed!'},
+                                                   context_instance=django.template.RequestContext(request))
+            
+            user = django.contrib.auth.models.User(username=data['nick'],
+                                                   first_name=data['firstname'],
+                                                   last_name=data['lastname'],
+                                                   email=data['email'],
+                                                   password=data['password1'])
+            user.save()
+            user.userprofile.sex = data['sex']
+            user.userprofile.save()
+            
             return django.shortcuts.redirect('homepage.views.home') # todo: redirect to the login page
         else:
             return django.shortcuts.render_to_response('create_form.html',
