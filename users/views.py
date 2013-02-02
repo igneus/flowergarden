@@ -13,9 +13,9 @@ def create(request):
     if request.method == 'POST':
         # arriving data to process
         form = CreateUserForm(request.POST)
-        if form.is_valid:
-            # todo: process data, create a user account, redirect to the login page
-            pass;
+        if form.is_valid():
+            # todo: process data, create a user account
+            return django.shortcuts.redirect('homepage.views.home') # todo: redirect to the login page
         else:
             return django.shortcuts.render_to_response('create_form.html',
                                                    {'form': form, 'error_message': 'Input invalid.'},
