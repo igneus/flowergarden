@@ -43,12 +43,6 @@ def create(request):
                                                    {'form': form},
                                                    context_instance=django.template.RequestContext(request))
 
-def create_process(request):
-    """
-    process data from the registration form
-    """
-    pass
-
 def list(request):
     """
     list users
