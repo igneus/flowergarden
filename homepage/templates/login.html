@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block title %}login{% endblock %}
+{% block mainheading %}Log in{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url homepage.views.login %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Log in">
+    </form>
+{% endblock %}

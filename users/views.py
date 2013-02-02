@@ -1,7 +1,7 @@
 import django.shortcuts
 import django.http
 import django.template
-import django.contrib.auth.models
+import django.contrib.auth.models, django.contrib.auth.hashers
 from flowers.models import *
 from models import UserProfile
 from forms import CreateUserForm
@@ -21,11 +21,12 @@ def create(request):
                                                    {'form': form, 'error_message': 'The two versions of your password differed!'},
                                                    context_instance=django.template.RequestContext(request))
             
+            hashed_password = django.contrib.auth.hashers.make_password(data['password1'])
             user = django.contrib.auth.models.User(username=data['nick'],
                                                    first_name=data['firstname'],
                                                    last_name=data['lastname'],
                                                    email=data['email'],
-                                                   password=data['password1'])
+                                                   password=hashed_password)
             user.save()
             user.userprofile.sex = data['sex']
             user.userprofile.save()
