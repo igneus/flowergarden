@@ -1,14 +1,19 @@
-<h1>Users</h1>
+{% extends "base_generic.html" %}
 
-{% if profiles_list %}
-    <ul>
-    {% for p in profiles_list %}
-        <li><a href="/users/{{ p.id }}/">{{ p.user.get_full_name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No girls? No boys? -- You can fix this problem by registering yourself and inviting your friends!</p>
-    <p>No access to the database? -- You can't fix this* - hopefully the problem is only temporary.</p>
-    <hr/>
-    <p style="font-size: small;">* = actually you can try to make the fix quicker by offering some fine chocolate to the admin</p>
-{% endif %}
+{% block title %}users - all{% endblock %}
+{% block mainheading %}Users{% endblock %}
+
+{% block content %}
+    {% if profiles_list %}
+        <ul>
+        {% for p in profiles_list %}
+            <li><a href="/users/{{ p.id }}/">{{ p.user.get_full_name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No girls? No boys? -- You can fix this problem by registering yourself and inviting your friends!</p>
+        <p>No access to the database? -- You can't fix this* - hopefully the problem is only temporary.</p>
+        <hr/>
+        <p style="font-size: small;">* = actually you can try to make the fix quicker by offering some fine chocolate to the admin</p>
+    {% endif %}
+{% endblock %}
