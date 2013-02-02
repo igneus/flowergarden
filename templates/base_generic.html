@@ -11,8 +11,11 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <h1>{% block mainheading %}{% endblock %}</h1>
+            <span class="sitetitle"><a href="{% url homepage.views.home %}">flowergarden</a></span>
         </div>
+        
+        
+        <h1>{% block mainheading %}{% endblock %}</h1>
         
         {% block content %}
         {% endblock %}

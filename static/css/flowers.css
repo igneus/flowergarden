@@ -1,5 +1,21 @@
 body, html {font-family: Verdana, sans-serif; font-size: small;}
 
+.header {
+    margin: 0; padding: 10px;
+    display: block;
+    background-color: #905; color: white;
+}
+
+.header span.sitetitle {
+    display: inline-block; font-size: 12pt; font-weight: bold;
+}
+.header a:link,
+.header a:active,
+.header a:visited {
+    color: white;
+    text-decoration: none;
+}
+
 .sex {
     display: inline-block;
     width: 14px; height: 14px;
