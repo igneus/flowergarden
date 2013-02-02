@@ -3,7 +3,7 @@
 {% if profiles_list %}
     <ul>
     {% for p in profiles_list %}
-        <li><a href="/flowers/users/{{ p.id }}/">{{ p.user.get_full_name }}</a></li>
+        <li><a href="/users/{{ p.id }}/">{{ p.user.get_full_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
