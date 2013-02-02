@@ -20,6 +20,8 @@
         <span class="sex male">♂</span>
     {% endif %}
     </li>
+    <li>joined flowergarden: {{ profile.user.date_joined|date:"d.m.Y" }}</li>
+    <li>last login: {{ profile.user.last_login|date:"d.m.Y" }}</li>
 </ul>
 
 <h2>Bouquets received</h2>
