@@ -4,36 +4,34 @@ import django.template
 import django.contrib.auth.models
 from flowers.models import *
 from models import UserProfile
+from forms import CreateUserForm
 
 def create(request):
     """
     show a form for user registration
     """
-    return django.shortcuts.render_to_response('create_form.html', context_instance=django.template.RequestContext(request))
+    if request.method == 'POST':
+        # arriving data to process
+        form = CreateUserForm(request.POST)
+        if form.is_valid:
+            # todo: process data, create a user account, redirect to the login page
+            pass;
+        else:
+            return django.shortcuts.render_to_response('create_form.html',
+                                                   {'form': form, 'error_message': 'Input invalid.'},
+                                                   context_instance=django.template.RequestContext(request))
+    else:
+        # show an empty form 
+        form = CreateUserForm()
+        return django.shortcuts.render_to_response('create_form.html',
+                                                   {'form': form},
+                                                   context_instance=django.template.RequestContext(request))
 
 def create_process(request):
     """
     process data from the registration form
     """
-    try:
-        with_deserved_nick = UserProfile.objects.get(user__username=request.POST['nick'])
-    except UserProfile.DoesNotExist:
-        # it's OK, the nick is free
-        with_deserved_nick = None
-    except KeyError:
-        return render_to_response('create', {
-            'error_message': "You didn't specify a nick.",
-        }, context_instance=django.template.RequestContext(request))
-    
-    if with_deserved_nick:
-        return render_to_response('create', {
-            'error_message': "Someone already uses the nick '{}'.".format(request.POST['nick']),
-        }, context_instance=django.template.RequestContext(request))
-    
-    
-    
-    new_user = django.contrib.auth.models.User(username=request.POST['username'],
-                                               password=request.POST['password1'])
+    pass
 
 def list(request):
     """
