@@ -19,7 +19,7 @@
                     <a href="{% url homepage.views.login %}">Log in</a> or <a href="{% url users.views.create %}">Create account</a>
                 {% else %}
                     <a href="{% url users.views.detail actor.userprofile.id %}">My profile [{{ actor.username }}]</a>
-                    <a href="">Log out</a>
+                    <a href="{% url homepage.views.logout %}">Log out</a>
                 {% endif %}
             </span>
         </div>

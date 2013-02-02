@@ -55,3 +55,9 @@ def login(request):
                                                    {'form': login_form},
                                                    context_instance=django.template.RequestContext(request))
     
+def logout(request):
+    """
+    log the user out
+    """
+    django.contrib.auth.logout(request)
+    return django.shortcuts.redirect('homepage.views.home')
