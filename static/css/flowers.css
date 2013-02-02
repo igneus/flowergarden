@@ -50,3 +50,10 @@ body, html {font-family: Verdana, sans-serif; font-size: small;}
 label {
     display: block; margin-top: 10px;
 }
+
+.error-message {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+}
