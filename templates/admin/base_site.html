@@ -7,4 +7,6 @@
 <h1 id="site-name">{% trans 'Flowergarden: Administration' %}</h1>
 {% endblock %}
 
-{% block nav-global %}{% endblock %}
+{% block nav-global %}
+    <a href="{% url homepage.views.home %}">View site</a>    
+{% endblock %}
